@@ -240,21 +240,21 @@ function DashboardContent() {
           </AnimatedSection>
         </div> */}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-w-0">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 min-w-0">
           <AnimatedSection delay={0.1} forceVisible={isExporting}>
             <IncomeCurrencyPieChart
               totalUSD={data.summary.totalIncomeUSD}
               totalEUR={data.summary.totalIncomeEUR}
             />
           </AnimatedSection>
-          <AnimatedSection delay={0.2} forceVisible={isExporting} className="h-full">
-            <div className="bg-white rounded-lg shadow-md p-8 flex items-center justify-center h-full border-2 border-dashed border-gray-300">
+          <AnimatedSection delay={0.2} forceVisible={isExporting} className="lg:col-span-2 h-full">
+            <div className="bg-white rounded-lg shadow-md p-12 flex items-center justify-center h-full min-h-[400px] border-2 border-dashed border-gray-300">
               <div className="text-center">
-                <div className="text-6xl mb-4">🚧</div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                <div className="text-7xl mb-6">🚧</div>
+                <h3 className="text-2xl font-semibold text-gray-700 mb-3">
                   {language === 'ua' ? 'Розділ витрат в розробці' : 'Expenses Section Under Development'}
                 </h3>
-                <p className="text-gray-500">
+                <p className="text-lg text-gray-500">
                   {language === 'ua'
                     ? 'Ця частина буде доступна найближчим часом'
                     : 'This section will be available soon'}
