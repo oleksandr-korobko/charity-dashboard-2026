@@ -1,0 +1,131 @@
+{
+  "income": [
+    {
+      "id": "1",
+      "date": "16.02.2026",
+      "paidUSD": 5.69,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "2",
+      "date": "27.02.2026",
+      "paidUSD": 500,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "3",
+      "date": "27.02.2026",
+      "paidUSD": 348.42,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "4",
+      "date": "01.03.2026",
+      "paidUSD": 47.61,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "5",
+      "date": "01.03.2026",
+      "paidUSD": 108.82,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "6",
+      "date": "02.03.2026",
+      "paidUSD": 56.57,
+      "paidEUR": 0,
+      "type": "income"
+    },
+    {
+      "id": "7",
+      "date": "02.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 122.33,
+      "type": "income"
+    },
+    {
+      "id": "8",
+      "date": "02.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 50,
+      "type": "income"
+    },
+    {
+      "id": "9",
+      "date": "02.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 108,
+      "type": "income"
+    },
+    {
+      "id": "10",
+      "date": "03.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 55,
+      "type": "income"
+    },
+    {
+      "id": "11",
+      "date": "03.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 200,
+      "type": "income"
+    },
+    {
+      "id": "12",
+      "date": "03.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 210,
+      "type": "income"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1",
+      "date": "05.03.2026",
+      "paidUSD": 100,
+      "paidEUR": 0,
+      "category": "Допомога через нестачу засобів",
+      "type": "expense"
+    },
+    {
+      "id": "2",
+      "date": "10.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 150,
+      "category": "Медична допомога",
+      "type": "expense"
+    },
+    {
+      "id": "3",
+      "date": "15.03.2026",
+      "paidUSD": 75,
+      "paidEUR": 0,
+      "category": "Захисне спорядження",
+      "type": "expense"
+    },
+    {
+      "id": "4",
+      "date": "20.03.2026",
+      "paidUSD": 0,
+      "paidEUR": 200,
+      "category": "Допомога з житлом",
+      "type": "expense"
+    }
+  ],
+  "summary": {
+    "totalIncomeUSD": 1067.11,
+    "totalIncomeEUR": 745.33,
+    "totalExpensesUSD": 175,
+    "totalExpensesEUR": 350,
+    "balanceUSD": 892.11,
+    "balanceEUR": 395.33,
+    "lastUpdated": "2026-03-15T12:00:00.000Z"
+  }
+}
