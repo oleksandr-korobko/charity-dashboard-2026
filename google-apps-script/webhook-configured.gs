@@ -13,7 +13,7 @@
 
 // НАЛАШТУВАННЯ - ЗМІНІТЬ ЦІ ЗНАЧЕННЯ
 const WEBHOOK_URL = 'https://your-app-name.vercel.app/api/webhook';
-const WEBHOOK_SECRET = 'ua-yogis-2026-webhook-K9mP3xL7vN2qR5wT8yF4cH6jB1sA0dE'; // Створіть складний ключ
+const WEBHOOK_SECRET = 'your-webhook-secret-here'; // Створіть складний ключ
 
 /**
  * Тригер: Спрацьовує автоматично при будь-якій зміні в таблиці

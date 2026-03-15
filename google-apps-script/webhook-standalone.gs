@@ -12,7 +12,7 @@
 // НАЛАШТУВАННЯ
 const SHEET_ID = '1FG88K8mutRm6-Z8ZrRgM4gd_rBtZre2LWtdyi6VXckw';
 const WEBHOOK_URL = 'https://your-app.vercel.app/api/webhook';
-const WEBHOOK_SECRET = 'ua-yogis-2026-webhook-K9mP3xL7vN2qR5wT8yF4cH6jB1sA0dE';
+const WEBHOOK_SECRET = 'your-webhook-secret-here';
 
 // Отримання даних з Google Sheets
 function getSheetData() {
