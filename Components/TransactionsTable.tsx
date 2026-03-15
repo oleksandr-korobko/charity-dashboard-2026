@@ -12,16 +12,12 @@ interface TransactionsTableProps {
 export default function TransactionsTable({ records }: TransactionsTableProps) {
   const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState<'all' | 'income' | 'expense'>('all');
+  const [filterType, setFilterType] = useState<'income' | 'expense'>('income');
   const [sortField, setSortField] = useState<'date' | 'amountUSD' | 'amountEUR'>('date');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   const filteredAndSortedRecords = useMemo(() => {
-    let filtered = records;
-
-    if (filterType !== 'all') {
-      filtered = filtered.filter(r => r.type === filterType);
-    }
+    let filtered = records.filter(r => r.type === filterType);
 
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
@@ -76,16 +72,6 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => setFilterType('all')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                filterType === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {t('filters.all')}
-            </button>
-            <button
               onClick={() => setFilterType('income')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                 filterType === 'income'
@@ -134,9 +120,6 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
                 >
                   {t('table.amountEUR')} {sortField === 'amountEUR' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
-                  {t('table.category')}
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -161,9 +144,6 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
                   </td>
                   <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">
                     {record.paidEUR > 0 ? formatEUR(record.paidEUR) : '-'}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {record.type === 'expense' && 'category' in record ? record.category : '-'}
                   </td>
                 </tr>
               ))}

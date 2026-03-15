@@ -176,10 +176,14 @@ function DashboardContent() {
       <header className="bg-white border-b fixed top-0 left-0 right-0 z-50 shadow-md" data-html2canvas-ignore>
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
            <div className="w-full flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <span className="font-medium">{t('dashboard.year')}</span>
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-md font-semibold">2026</span>
-              </div>
+              <a
+                href="https://ukrainian-yogis-aid-dashboard.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gray-600 hover:text-blue-600 transition font-medium"
+              >
+                {language === 'ua' ? 'Попередні роки' : 'Previous Years'}
+              </a>
 
               <div className="flex flex-wrap items-center gap-3 justify-end">
                 <button
