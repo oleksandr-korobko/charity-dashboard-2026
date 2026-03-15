@@ -11,26 +11,28 @@ interface SummaryCardsProps {
 }
 
 export default function SummaryCards({ summary, totalTransactions }: SummaryCardsProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const cards = [
     {
-      title: t('summary.totalIncome'),
+      title: language === 'ua' ? 'Надходження USD' : 'Income USD',
       valueUSD: formatUSD(summary.totalIncomeUSD),
-      valueEUR: formatEUR(summary.totalIncomeEUR),
+      valueEUR: '',
       icon: TrendingUp,
       color: "text-green-600",
       bgColor: "bg-green-50",
-      borderColor: "border-green-200"
+      borderColor: "border-green-200",
+      singleValue: true
     },
     {
-      title: t('summary.totalExpenses'),
-      valueUSD: formatUSD(summary.totalExpensesUSD),
-      valueEUR: formatEUR(summary.totalExpensesEUR),
-      icon: TrendingDown,
-      color: "text-red-600",
-      bgColor: "bg-red-50",
-      borderColor: "border-red-200"
+      title: language === 'ua' ? 'Надходження EUR' : 'Income EUR',
+      valueUSD: formatEUR(summary.totalIncomeEUR),
+      valueEUR: '',
+      icon: TrendingUp,
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      borderColor: "border-blue-200",
+      singleValue: true
     }
     /* TODO: Повернути ці картки коли буде готова частина по витратам */
     // {
@@ -55,7 +57,7 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 min-w-0">
+    <div className="grid grid-cols-2 gap-6 min-w-0">
       {cards.map((card, index) => {
         const Icon = card.icon;
         return (
@@ -64,14 +66,20 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <p className="text-sm font-medium text-gray-600 mb-3">{card.title}</p>
-                  <div className="space-y-1">
-                    <p className={`text-2xl font-bold ${card.color}`}>
+                  {card.singleValue ? (
+                    <p className={`text-3xl font-bold ${card.color}`}>
                       {card.valueUSD}
                     </p>
-                    <p className={`text-lg font-semibold ${card.color} opacity-75`}>
-                      {card.valueEUR}
-                    </p>
-                  </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <p className={`text-2xl font-bold ${card.color}`}>
+                        {card.valueUSD}
+                      </p>
+                      <p className={`text-lg font-semibold ${card.color} opacity-75`}>
+                        {card.valueEUR}
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div className={`${card.bgColor} p-3 rounded-full`}>
                   <Icon className={`h-6 w-6 ${card.color}`} />
