@@ -80,8 +80,8 @@ git push -u origin main
 Перед деплоєм, додайте ці змінні:
 
 ```
-GOOGLE_API_KEY=AIzaSyDPTTGIzn3ZiKe_NQrYCYhy-LVzs9_Cuv4
-INCOME_SHEET_ID=1FG88K8mutRm6-Z8ZrRgM4gd_rBtZre2LWtdyi6VXckw
+GOOGLE_API_KEY=your-google-api-key-here
+INCOME_SHEET_ID=your-spreadsheet-id-here
 INCOME_SHEET_NAME=UA_Yogis
 WEBHOOK_SECRET=ваш-складний-секретний-ключ-тут
 ```
