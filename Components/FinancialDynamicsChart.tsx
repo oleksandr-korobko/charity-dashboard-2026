@@ -75,7 +75,7 @@ export default function FinancialDynamicsChart({ income, expenses }: FinancialDy
               onClick={() => setCurrency('USD')}
               className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
                 currency === 'USD'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-green-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >

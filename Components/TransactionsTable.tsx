@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../src/components/ui/card";
-import { formatUSD, formatEUR } from "../src/lib/utils";
+import { formatUSD, formatEUR, translateCityName } from "../src/lib/utils";
 import { useLanguage } from "../src/contexts/LanguageContext";
 import { ArrowUpCircle, ArrowDownCircle, Search } from "lucide-react";
 import type { FinancialRecord } from "../src/types/financial";
@@ -10,9 +10,9 @@ interface TransactionsTableProps {
 }
 
 export default function TransactionsTable({ records }: TransactionsTableProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterType, setFilterType] = useState<'income' | 'expense'>('income');
+  const [filterType, setFilterType] = useState<'income' | 'expense'>('expense');
   const [sortField, setSortField] = useState<'date' | 'amountUSD' | 'amountEUR'>('date');
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
@@ -23,7 +23,11 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(r => {
         if (r.type === 'expense' && 'category' in r) {
-          return r.category.toLowerCase().includes(term) || r.date.includes(term);
+          return (
+            r.category.toLowerCase().includes(term) ||
+            r.date.includes(term) ||
+            ('city' in r && r.city.toLowerCase().includes(term))
+          );
         }
         return r.date.includes(term);
       });
@@ -33,7 +37,10 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
       let comparison = 0;
 
       if (sortField === 'date') {
-        comparison = a.date.localeCompare(b.date);
+        // Convert DD.MM.YYYY to YYYY.MM.DD for proper date comparison
+        const dateA = a.date.split('.').reverse().join('.');
+        const dateB = b.date.split('.').reverse().join('.');
+        comparison = dateA.localeCompare(dateB);
       } else if (sortField === 'amountUSD') {
         comparison = a.paidUSD - b.paidUSD;
       } else if (sortField === 'amountEUR') {
@@ -120,6 +127,22 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
                 >
                   {t('table.amountEUR')} {sortField === 'amountEUR' && (sortDirection === 'asc' ? '↑' : '↓')}
                 </th>
+                {filterType === 'expense' && (
+                  <>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+                      City
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+                      Aid by Category
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+                      Beneficiary
+                    </th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
+                      Card
+                    </th>
+                  </>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -145,6 +168,22 @@ export default function TransactionsTable({ records }: TransactionsTableProps) {
                   <td className="px-4 py-3 text-sm text-right font-medium text-gray-900">
                     {record.paidEUR > 0 ? formatEUR(record.paidEUR) : '-'}
                   </td>
+                  {filterType === 'expense' && record.type === 'expense' && (
+                    <>
+                      <td className="px-4 py-3 text-sm text-gray-700">
+                        {'city' in record ? translateCityName(record.city, language) : '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-700">
+                        {'category' in record ? record.category : '-'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-700">
+                        {'beneficiary' in record ? record.beneficiary : '******'}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-700">
+                        {'card' in record ? record.card : '****'}
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))}
             </tbody>

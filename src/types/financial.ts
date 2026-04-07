@@ -11,7 +11,10 @@ export interface ExpenseRecord {
   date: string;
   paidUSD: number;
   paidEUR: number;
+  city: string;
   category: string;
+  beneficiary: string;
+  card: string;
   type: 'expense';
 }
 

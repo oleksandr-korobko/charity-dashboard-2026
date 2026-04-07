@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import SummaryCards from "./Components/SummaryCards";
-import IncomeVsExpensesChart from "./Components/IncomeVsExpensesChart";
-import FinancialDynamicsChart from "./Components/FinancialDynamicsChart";
 import IncomeCurrencyPieChart from "./Components/IncomeCurrencyPieChart";
+import ExpenseSummaryCard from "./Components/ExpenseSummaryCard";
 import TransactionsTable from "./Components/TransactionsTable";
 import LanguageToggle from "./Components/LanguageToggle";
 import { LanguageProvider, useLanguage } from "./src/contexts/LanguageContext";
@@ -224,51 +223,23 @@ function DashboardContent() {
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 min-w-0">
 
-        {/* TODO: Повернутися до цього блоку коли буде готова частина по витратам */}
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-w-0">
-          <AnimatedSection delay={0.1} forceVisible={isExporting}>
-            <IncomeVsExpensesChart summary={data.summary} />
-          </AnimatedSection>
-          <AnimatedSection delay={0.2} forceVisible={isExporting}>
-            <FinancialDynamicsChart
-              income={data.income}
-              expenses={data.expenses}
-            />
-          </AnimatedSection>
-        </div> */}
+        <AnimatedSection forceVisible={isExporting}>
+          <SummaryCards
+            summary={data.summary}
+            totalTransactions={data.expenses.length}
+          />
+        </AnimatedSection>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-w-0">
-          {/* Ліва колонка: Summary cards + Pie chart */}
-          <div className="space-y-8">
-            <AnimatedSection forceVisible={isExporting}>
-              <SummaryCards
-                summary={data.summary}
-                totalTransactions={allRecords.length}
-              />
-            </AnimatedSection>
-            <AnimatedSection delay={0.1} forceVisible={isExporting}>
-              <IncomeCurrencyPieChart
-                totalUSD={data.summary.totalIncomeUSD}
-                totalEUR={data.summary.totalIncomeEUR}
-              />
-            </AnimatedSection>
-          </div>
+          <AnimatedSection delay={0.1} forceVisible={isExporting}>
+            <IncomeCurrencyPieChart
+              totalUSD={data.summary.totalIncomeUSD}
+              totalEUR={data.summary.totalIncomeEUR}
+            />
+          </AnimatedSection>
 
-          {/* Права колонка: Заглушка */}
-          <AnimatedSection delay={0.2} forceVisible={isExporting} className="h-full">
-            <div className="bg-white rounded-lg shadow-md p-12 flex items-center justify-center h-full min-h-[600px] border-2 border-dashed border-gray-300">
-              <div className="text-center">
-                <div className="text-7xl mb-6">🚧</div>
-                <h3 className="text-2xl font-semibold text-gray-700 mb-3">
-                  {language === 'ua' ? 'Розділ витрат в розробці' : 'Expenses Section Under Development'}
-                </h3>
-                <p className="text-lg text-gray-500">
-                  {language === 'ua'
-                    ? 'Ця частина буде доступна найближчим часом'
-                    : 'This section will be available soon'}
-                </p>
-              </div>
-            </div>
+          <AnimatedSection delay={0.2} forceVisible={isExporting}>
+            <ExpenseSummaryCard expenses={data.expenses} />
           </AnimatedSection>
         </div>
 

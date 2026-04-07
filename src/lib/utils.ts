@@ -36,22 +36,21 @@ export function formatPercentage(percentage: number): string {
   return `${percentage.toFixed(1)}%`;
 }
 
-// Function to translate Ukrainian city names to English or keep in Ukrainian
+// Function to translate city names bidirectionally (UA ↔ EN)
 export function translateCityName(cityName: string, language: 'en' | 'ua' = 'en'): string {
-  if (!cityName || cityName.trim() === "" || cityName.startsWith("€") || cityName.includes("\"")) {
+  // Trim whitespace and check for empty/invalid values
+  const trimmedCity = (cityName || '').trim();
+
+  if (!trimmedCity || trimmedCity.startsWith("€") || trimmedCity.includes("\"")) {
     return language === 'en' ? "Unknown" : "Невідомо";
   }
 
-  // If language is Ukrainian, return the original Ukrainian name (cleaned up)
-  if (language === 'ua') {
-    return cityName;
-  }
-
-  // Otherwise, translate to English
-  const cityTranslations: Record<string, string> = {
+  // Bidirectional city name mapping (Ukrainian → English)
+  const cityTranslationsUAtoEN: Record<string, string> = {
     "Біла Церква": "Bila Tserkva",
-    "Вінниця": "Vinnytsia", 
+    "Вінниця": "Vinnytsia",
     "Вознесенськ": "Voznesensk",
+    "Глеваха": "Glevakha",
     "Дніпро": "Dnipro",
     "Запоріжжя": "Zaporizhzhia",
     "Івано-Франківськ": "Ivano-Frankivsk",
@@ -93,13 +92,12 @@ export function translateCityName(cityName: string, language: 'en' | 'ua' = 'en'
     "Умань": "Uman",
     "Фастів": "Fastiv",
     "Южне": "Yuzhne",
-    // Additional cities from the data
     "Добропілля": "Dobropillia",
     "Житомир": "Zhytomyr",
     "Іршанск Житомирська обл.": "Irshansk, Zhytomyr Oblast",
     "Косів": "Kosiv",
     "Ніжин": "Nizhyn",
-    "Нововолинськ": "Novovolynsk",
+    "Нovovолинськ": "Novovolynsk",
     "Очаків": "Ochakiv",
     "Пирятин": "Pyryatyn",
     "Полт обл": "Poltava Oblast",
@@ -110,14 +108,28 @@ export function translateCityName(cityName: string, language: 'en' | 'ua' = 'en'
     "Снідавка": "Snidavka",
     "Українка": "Ukrainka",
     "Южноукраїнськ": "Yuzhnoukrainsk",
+    "Південноукраїнськ": "Yuzhnoukrainsk",
     "с. Рожни Київської області": "Rozhny village, Kyiv Oblast",
     "Київська обл": "Kyiv Oblast",
     "Київ/Нова Каховка": "Kyiv/Nova Kakhovka",
     "Кривий Ріг": "Kryvyi Rih",
-    "Жовті Води": "Zhovti Vody"
+    "Жовті Води": "Zhovti Vody",
+    "Польща": "Poland"
   };
 
-  return cityTranslations[cityName] || cityName;
+  // Create reverse mapping (English → Ukrainian)
+  const cityTranslationsENtoUA: Record<string, string> = {};
+  Object.entries(cityTranslationsUAtoEN).forEach(([ua, en]) => {
+    cityTranslationsENtoUA[en] = ua;
+  });
+
+  if (language === 'en') {
+    // Translate UA → EN, or keep as-is if already in English
+    return cityTranslationsUAtoEN[trimmedCity] || trimmedCity;
+  } else {
+    // Translate EN → UA, or keep as-is if already in Ukrainian
+    return cityTranslationsENtoUA[trimmedCity] || trimmedCity;
+  }
 }
 
 // Category translation system

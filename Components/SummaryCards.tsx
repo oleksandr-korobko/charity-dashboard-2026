@@ -15,49 +15,46 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
 
   const cards = [
     {
-      title: language === 'ua' ? 'Надходження USD' : 'Income USD',
+      title: language === 'ua' ? 'Надходження' : 'Income',
       valueUSD: formatUSD(summary.totalIncomeUSD),
-      valueEUR: '',
+      valueEUR: formatEUR(summary.totalIncomeEUR),
       icon: TrendingUp,
       color: "text-green-600",
       bgColor: "bg-green-50",
-      borderColor: "border-green-200",
-      singleValue: true
+      borderColor: "border-green-200"
     },
     {
-      title: language === 'ua' ? 'Надходження EUR' : 'Income EUR',
-      valueUSD: formatEUR(summary.totalIncomeEUR),
-      valueEUR: '',
-      icon: TrendingUp,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
-      borderColor: "border-blue-200",
+      title: language === 'ua' ? 'Витрати' : 'Expenses',
+      valueUSD: formatUSD(summary.totalExpensesUSD),
+      valueEUR: formatEUR(summary.totalExpensesEUR),
+      icon: TrendingDown,
+      color: "text-red-600",
+      bgColor: "bg-red-50",
+      borderColor: "border-red-200"
+    },
+    {
+      title: t('summary.balance'),
+      valueUSD: formatUSD(summary.balanceUSD),
+      valueEUR: formatEUR(summary.balanceEUR),
+      icon: Wallet,
+      color: summary.balanceUSD >= 0 ? "text-blue-600" : "text-orange-600",
+      bgColor: summary.balanceUSD >= 0 ? "bg-blue-50" : "bg-orange-50",
+      borderColor: summary.balanceUSD >= 0 ? "border-blue-200" : "border-orange-200"
+    },
+    {
+      title: language === 'ua' ? 'Кількість платежів' : 'Number of Payments',
+      valueUSD: totalTransactions.toLocaleString(),
+      valueEUR: "",
+      icon: FileText,
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      borderColor: "border-purple-200",
       singleValue: true
     }
-    /* TODO: Повернути ці картки коли буде готова частина по витратам */
-    // {
-    //   title: t('summary.balance'),
-    //   valueUSD: formatUSD(summary.balanceUSD),
-    //   valueEUR: formatEUR(summary.balanceEUR),
-    //   icon: Wallet,
-    //   color: summary.balanceUSD >= 0 ? "text-blue-600" : "text-orange-600",
-    //   bgColor: summary.balanceUSD >= 0 ? "bg-blue-50" : "bg-orange-50",
-    //   borderColor: summary.balanceUSD >= 0 ? "border-blue-200" : "border-orange-200"
-    // },
-    // {
-    //   title: t('summary.numberOfTransactions'),
-    //   valueUSD: totalTransactions.toLocaleString(),
-    //   valueEUR: "",
-    //   icon: FileText,
-    //   color: "text-purple-600",
-    //   bgColor: "bg-purple-50",
-    //   borderColor: "border-purple-200",
-    //   singleValue: true
-    // }
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-6 min-w-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-w-0">
       {cards.map((card, index) => {
         const Icon = card.icon;
         return (
@@ -72,10 +69,10 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
                     </p>
                   ) : (
                     <div className="space-y-1">
-                      <p className={`text-2xl font-bold ${card.color}`}>
+                      <p className="text-2xl font-bold text-green-600">
                         {card.valueUSD}
                       </p>
-                      <p className={`text-lg font-semibold ${card.color} opacity-75`}>
+                      <p className="text-2xl font-bold text-blue-600">
                         {card.valueEUR}
                       </p>
                     </div>
