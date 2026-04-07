@@ -108,7 +108,7 @@ export default function ExpenseSummaryCard({ expenses }: ExpenseSummaryCardProps
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <TrendingDown className="h-5 w-5 text-red-600" />
-          {language === 'ua' ? 'Підсумок витрат' : 'Expenses Summary'}
+          {language === 'ua' ? 'Підсумок витрат' : 'Aid Distribution Summary'}
         </CardTitle>
       </CardHeader>
       <CardContent>

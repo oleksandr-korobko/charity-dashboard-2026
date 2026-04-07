@@ -15,7 +15,7 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
 
   const cards = [
     {
-      title: language === 'ua' ? 'Надходження' : 'Income',
+      title: language === 'ua' ? 'Надходження' : 'Donations received',
       valueUSD: formatUSD(summary.totalIncomeUSD),
       valueEUR: formatEUR(summary.totalIncomeEUR),
       icon: TrendingUp,
@@ -24,7 +24,7 @@ export default function SummaryCards({ summary, totalTransactions }: SummaryCard
       borderColor: "border-green-200"
     },
     {
-      title: language === 'ua' ? 'Витрати' : 'Expenses',
+      title: language === 'ua' ? 'Витрати' : 'Aid distributed',
       valueUSD: formatUSD(summary.totalExpensesUSD),
       valueEUR: formatEUR(summary.totalExpensesEUR),
       icon: TrendingDown,

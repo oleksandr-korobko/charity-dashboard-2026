@@ -87,7 +87,7 @@ export default function IncomeCurrencyPieChart({ totalUSD, totalEUR }: IncomeCur
 
   const title = language === 'ua'
     ? 'Розподіл надходжень за валютами'
-    : 'Income Distribution by Currency';
+    : 'Donations Breakdown by Currency';
 
   return (
     <Card ref={ref} className="h-full">

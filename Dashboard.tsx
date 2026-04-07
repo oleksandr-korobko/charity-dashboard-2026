@@ -208,7 +208,7 @@ function DashboardContent() {
         </div>
       </header>
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-28 pb-6 text-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 md:pt-28 pb-6 text-center">
           {renderTitle()}
           <p className="text-lg text-gray-600 mt-3">
             {t('dashboard.subtitle')}

@@ -14,7 +14,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations = {
   en: {
     'dashboard.title': 'Financial Report 2026',
-    'dashboard.subtitle': 'Income and Expenses for Ukrainian Yogis Support',
+    'dashboard.subtitle': 'Donations and Support Flow for Ukrainian Yogis',
     'dashboard.year': '2026',
     'summary.totalIncome': 'Total Income',
     'summary.totalExpenses': 'Total Expenses',
@@ -42,8 +42,8 @@ const translations = {
     'table.searchPlaceholder': 'Search...',
     'table.percentage': '%',
     'table.scrollHint': 'Scroll horizontally',
-    'type.income': 'Income',
-    'type.expense': 'Expense',
+    'type.income': 'Paid in',
+    'type.expense': 'Paid out',
     'source.paypal': 'PayPal',
     'source.iban': 'IBAN Transfer',
     'currency.usd': 'USD',
